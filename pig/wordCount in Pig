@@ -1,0 +1,60 @@
+ wordcount= load '/pig/pocwork/wordcount_pig.txt' as (line:chararray)
+ (OR)
+wordcount_hdfs= load 'hdfs://localhost:8020/pig/pocwork/wordcount_pig.txt' as (line:chararray)
+
+
+This is a hadoop post
+hadoop is a bigdata technology
+
+=======================================================================================================================
+ -- 1.Load the data from HDFS
+
+ wordcount= load '/pig/pocwork/wordcount_pig.txt' as (line:chararray);
+
+=========================================================================================================================
+-- 2. Convert the Sentence into words.
+ Use TOKENIZE(line) 
+ If we have any delimeter like space we can specify as
+  (TOKENIZE(line,' '))
+========================================================================================================================
+-- 3 Convert columns into rows ..
+-- I mean we have to convert every line of data into multiple rows ,for this we have function called FLATTEN in pig.
+
+-- FLATTEN is converting into the line of data into the mutliple rows
+
+ > words = foreach wordcount generate FLATTEN(TOKENIZE(line,' ')) as word;
+
+===========================================================================================================================
+
+ -- 4. Apply GROUP BY
+
+we have to count each word occurance, for that we have to group all the words
+
+grouped = group words by word
+
+a,{(a),(a)})
+(is,{(is),(is)})
+(This,{(This)})
+(post,{(post)})
+(hadoop,{(hadoop),(hadoop)})
+(bigdata,{(bigdata)})
+(technology,{(technology)})
+
+=============================================================================================
+
+-- 5. Generate word count 
+
+wordRes= foreach groupedBy generate group,COUNT(words);
+
+2016-12-26 01:32:10,214 [main] INFO  org.apache.pig.backend.hadoop.executionengine.util.MapRedUtil - Total input paths to process : 1
+(a,2)
+(is,2)
+(This,1)
+(post,1)
+(hadoop,2)
+(bigdata,1)
+(technology,1)
+
+
+
+
