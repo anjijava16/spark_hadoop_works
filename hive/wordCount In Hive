@@ -1,0 +1,24 @@
+
+-- Create table in Hive
+  create table feedback(comments string);
+
+--- Load data from the sample file
+  hive> load data local inpath 'dataInput.txt' into table feedback;
+
+-- Convert comments into an array
+
+ select split(comments,' ') from feedback;
+
+-- Use table generation UDF
+
+Now time to return mutliple row from the array of String 
+Now use build in table generation UDTF explode function
+
+select explode(split(comments,' ')) from feedback
+
+
+ select word,count(*) from (select explode( split(comments,' ')) as word from feedback)tmp group by word;
+
+   (OR)
+
+SELECT word, COUNT(*) FROM feedback LATERAL VIEW explode(split(comments, ' ')) tmp as word GROUP BY word;
