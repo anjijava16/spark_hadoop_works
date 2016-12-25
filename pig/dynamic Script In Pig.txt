@@ -1,0 +1,33 @@
+HDFS File Name :: dynamicParamsPig.txt
+=======================================================>>>
+But Its not a good practice to touch the code in production ,so we can make this script dynamic by using –param option of Piglatin.
+Whatever values we want to decide at the time of running we make them dynamic .now we want to decide number to be filtered at the time running job,we can write second line like below.
+
+
+ -- Static Apporach start here *************************
+dynamic= load '/pig/pocwork/dynamicParamsPig.txt' as (number:int);
+specificNumber= FILTER dynamic by number==$dynanumber;
+dump specificNumber;
+-- static apporach end here *****************
+
+
+Case 1:--->>
+Values taking Dynamically from Console :: (Ex: Here taking single value as dynamicNumber from console 
+IMP:::====>>  pig -f dynamicscripts.pig -param dynanumber=12
+
+
+Case 2: ---->>
+
+ -- Static Apporach start here *************************
+dynamic= load '$path' as (number:int);
+specificNumber= FILTER dynamic by number==$dynanumber;
+dump specificNumber;
+-- static apporach end here *****************
+
+Values taking Dynamically from Console :: (Ex: Here taking single value as dynamicNumber ,path from console  
+IMP::===>> pig -f dynamicscripts.pig -param dynanumber=12 -param path=/pig/pocwork/dynamicParamsPig.txt
+
+dynamic= load '/pig/pocwork/dynamicParamsPig.txt' as (number:int);
+
+
+
