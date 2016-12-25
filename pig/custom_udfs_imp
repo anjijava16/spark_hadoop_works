@@ -1,0 +1,39 @@
+
+1) 
+REGISTER <PATH OF THE JAR FILE>;
+Register path of the Jar file 
+REGISTER hdfs://localhost:8020/pig/pocwork/sentimentanalysis-pig.jar;
+
+-------------------------------------------------------------------------------
+2) Define the function in pig
+
+DEFINE <function name> 'UDF class name with package'
+
+
+DEFINE <function name> 'UDF CLASS NAME WITH PACKAGE'
+
+DEFINE sentiment com.it.iwt.sentimentanalysis.pig.udf.SentimentUdf();
+
+-----------------------------------------------------------------------------------------
+
+3) 
+
+ Analyse the tweets using sentiment function using below commands
+ sentment_tweet = foreach sentmentAnalaysis_data generate tweet,sentiment(tweet) as tweetdata;
+
+--------------------------------------------------------------------------------------
+
+4)  store sentment_tweet into '/sentmentanalysis_pig'
+
+
+--------------------------------------------------------------------------
+5) 
+ sentment_tweet = foreach sentmentAnalaysis_data generate tweet,sentiment(tweet) as tweetdata;
+
+ sentiment_case= foreach sentment_tweet  generate tweet,(
+CASE
+ WHEN tweetdata==1 THEN 'postive'
+ WHEN tweetdata==0 THEN 'ZERO'
+ WHEN tweetdata==-1 THEN 'NEGATIVE'
+ END
+ );
