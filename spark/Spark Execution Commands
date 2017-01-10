@@ -1,0 +1,101 @@
+
+
+
+SBT Commands ::--->>
+
+cd /home/hadoop/spark/workspace/KalyanSparkProjectSbt
+sbt clean eclipse
+sbt package
+
+
+=====================================
+**************** Spark Modes *************
+  i) local
+  ii)local[h]
+  iii)local[*]
+ iv)spark://<masterIP>:7077
+ v) mesos://<masterIP>:5050
+vi)yarn-client
+vii)yarn-cluster
+
+
+
+i) local Mode ::-->>
+
+$SPARK_HOME/bin/spark-submit --class com.orienit.spark.scala.training.WordCount --master local /home/hadoop/spark/Jar_Custom/kalyansparkprojectsbt_2.11-1.0.jar /home/hadoop/spark/spark_data/abc.txt /home/hadoop/spark/spark_data/wordcount_op/Sbt_OP_WordCount
+
+
+i) local[*] Mode ::-->>
+$SPARK_HOME/bin/spark-submit --class com.orienit.spark.scala.training.WordCount --master local[*] /home/hadoop/spark/Jar_Custom/kalyansparkprojectsbt_2.11-1.0.jar /home/hadoop/spark/spark_data/abc.txt /home/hadoop/spark/spark_data/wordcount_op/Sbt_OP_WordCount_*
+
+
+Starting the Spark $SPARK_HOME/sbin/start-all.sh
+
+
+iii) Spark Master at spark://hadoop:7077
+
+$SPARK_HOME/bin/spark-submit --class com.orienit.spark.scala.training.WordCount --master spark://hadoop:7077 /home/hadoop/spark/Jar_Custom/kalyansparkprojectsbt_2.11-1.0.jar /home/hadoop/spark/spark_data/abc.txt /home/hadoop/spark/spark_data/wordcount_op/Sbt_OP_WordCount_*
+
+localhost:8080
+
+
+vi)yarn-client
+
+$SPARK_HOME/bin/spark-submit --class com.orienit.spark.scala.training.WordCount --master yarn-client /home/hadoop/spark/Jar_Custom/kalyansparkprojectsbt_2.11-1.0.jar /home/hadoop/spark/spark_data/abc.txt /home/hadoop/spark/spark_data/wordcount_op/Sbt_OP_WordCount_YarnClient2
+With out setting the above files export HADOOP_CONF_DIR=/home/hadoop/spark/hadoop-2.6.0/etc/hadoop
+
+Here we need to start the Start-yarn.sh (Yarn)
+
+And mr job 
+
+$mr-jobhistory-daemon.sh start historyserver
+
+
+
+yarn-cluster::->>
+
+
+$SPARK_HOME/bin/spark-submit --class com.orienit.spark.scala.training.WordCount --master yarn-cluster /home/hadoop/spark/Jar_Custom/kalyansparkprojectsbt_2.11-1.0.jar /home/hadoop/spark/spark_data/abc.txt /home/hadoop/spark/spark_data/wordcount_op/Sbt_OP_WordCount_YarnClient
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

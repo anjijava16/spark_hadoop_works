@@ -1,0 +1,56 @@
+scala> rdd1.collect;
+res23: Array[Int] = Array(1, 2, 3, 4, 5, 6)
+
+scala> rdd2.collect;
+res24: Array[Char] = Array(a, e, i, c, d)
+
+scala> rdd1.foreach(x=>println(x));
+1
+2
+4
+3
+5
+6
+
+scala> rdd1.foreach(println);
+2
+3
+1
+4
+5
+6
+
+scala> rdd1.collect.foreach(println);
+1
+2
+3
+4
+5
+6
+
+scala> rdd1.map(x=>x+1).foreach(println);
+6
+7
+2
+3
+4
+5
+
+scala> rdd1.map(x=>x+1);
+res29: org.apache.spark.rdd.RDD[Int] = MapPartitionsRDD[3] at map at <console>:29
+
+scala> rdd1.map(x=>x+1).collect
+res30: Array[Int] = Array(2, 3, 4, 5, 6, 7)                                     
+
+scala> 
+
+scala>     rdd1.collect
+res31: Array[Int] = Array(1, 2, 3, 4, 5, 6)
+
+scala> rdd1.map(x=>x+1).collect;
+res32: Array[Int] = Array(2, 3, 4, 5, 6, 7)
+
+scala> rdd.map()
+<console>:24: error: not found: value rdd
+       rdd.map()
+       ^

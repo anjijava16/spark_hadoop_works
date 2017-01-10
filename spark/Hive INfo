@@ -1,0 +1,918 @@
+
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+
+
+
+
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+export PATH=$JAVA_HOME/bin:$PATH
+
+
+export HADOOP_HOME=/home/hadoop/spark/hadoop-2.6.0
+export PATH=$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH
+
+export ACTIVATOR_HOME=/home/hadoop/spark/activator-dist-1.3.7
+export PATH=$ACTIVATOR_HOME:$PATH
+
+export AVRO_HOME=/home/hadoop/spark/avro-1.7.7
+export CLASSPATH=$CLASSPATH:$AVRO_HOME/jars/*
+
+
+
+export CASSANDRA_HOME=/home/hadoop/spark/apache-cassandra-3.9
+export PATH=$CASSANDRA_HOME/bin:$PATH
+
+
+
+export DRILL_HOME=/home/hadoop/spark/apache-drill-1.8.0
+export PATH=$DRILL_HOME/bin:$PATH
+
+
+
+
+export FLUME_HOME=/home/hadoop/spark/apache-flume-1.6.0-bin
+export PATH=$FLUME_HOME/bin:$PATH
+
+export HBASE_HOME=/home/hadoop/spark/hbase-1.1.2
+export PATH=$HBASE_HOME/bin:$PATH
+
+
+export HIVE_HOME=/home/hadoop/spark/apache-hive-1.2.1-bin
+export PATH=$HIVE_HOME/bin:$PATH
+
+
+export KAFKA_HOME=/home/hadoop/spark/kafka_2.11-0.9.0.0
+export PATH=$KAFKA_HOME/bin:$PATH
+
+
+
+export MAHOUT_HOME=/home/hadoop/spark/apache-mahout-distribution-0.11.1
+export PATH=$MAHOUT_HOME/bin:$PATH
+export MAHOUT_LOCAL=true
+
+
+
+export M2_HOME=/home/hadoop/spark/apache-maven-3.3.9
+export PATH=$M2_HOME/bin:$PATH
+
+export MESOS_HOME=/home/hadoop/spark/mesos-0.27.1
+export PATH=$MESOS_HOME/bin:$PATH
+
+
+export PHOENIX_HOME=/home/hadoop/spark/phoenix-4.7.0-HBase-1.1-bin
+export PATH=$PHOENIX_HOME/bin:$PATH
+
+
+
+export SBT_HOME=/home/hadoop/spark/sbt
+export PATH=$SBT_HOME/bin:$PATH
+
+export SCALA_HOME=/home/hadoop/spark/scala-2.11.7
+export PATH=$SCALA_HOME/bin:$PATH
+
+
+  ############ Spark 1.x Version #################
+#export SPARK_HOME=/home/hadoop/spark/spark-1.6.0-bin-hadoop2.6
+#export PATH=$SPARK_HOME/bin:$PATH
+
+
+  ############ Spark 2.x Version #################
+export SPARK_HOME=/home/hadoop/spark/spark-2.0.2-bin-hadoop2.6
+export PATH=$SPARK_HOME/bin:$PATH
+
+export STORM_HOME=/home/hadoop/spark/apache-storm-0.10.0
+export PATH=$STORM_HOME/bin:$PATH
+
+
+export WEKA_HOME=/home/hadoop/spark/weka-3-7-13
+
+
+
+export ZEPPELIN_HOME=/home/hadoop/spark/zeppelin-0.6.2-bin-all
+export PATH=$ZEPPELIN_HOME/bin:$PATH
+
+
+
+export ZOOKEEPER_HOME=/home/hadoop/spark/zookeeper-3.4.6
+export PATH=$ZOOKEEPER_HOME/bin:$PATH# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+# don't put duplicate lines or lines starting with space in the history.
+# See bash(1) for more options
+HISTCONTROL=ignoreboth
+
+# append to the history file, don't overwrite it
+shopt -s histappend
+
+# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# If set, the pattern "**" used in a pathname expansion context will
+# match all files and zero or more directories and subdirectories.
+#shopt -s globstar
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
+# set a fancy prompt (non-color, unless we know we "want" color)
+case "$TERM" in
+    xterm-color) color_prompt=yes;;
+esac
+
+# uncomment for a colored prompt, if the terminal has the capability; turned
+# off by default to not distract the user: the focus in a terminal window
+# should be on the output of commands, not on the prompt
+#force_color_prompt=yes
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	# We have color support; assume it's compliant with Ecma-48
+	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+	# a case would tend to support setf rather than setaf.)
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+
+if [ "$color_prompt" = yes ]; then
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+fi
+unset color_prompt force_color_prompt
+
+# If this is an xterm set the title to user@host:dir
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# colored GCC warnings and errors
+#export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+
+
+
+
+export JAVA_HOME=/usr/lib/jvm/java-7-openjdk-amd64
+export PATH=$JAVA_HOME/bin:$PATH
+
+
+export HADOOP_HOME=/home/hadoop/spark/hadoop-2.6.0
+export PATH=$JAVA_HOME/bin:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$PATH
+
+export ACTIVATOR_HOME=/home/hadoop/spark/activator-dist-1.3.7
+export PATH=$ACTIVATOR_HOME:$PATH
+
+export AVRO_HOME=/home/hadoop/spark/avro-1.7.7
+export CLASSPATH=$CLASSPATH:$AVRO_HOME/jars/*
+
+
+
+export CASSANDRA_HOME=/home/hadoop/spark/apache-cassandra-3.9
+export PATH=$CASSANDRA_HOME/bin:$PATH
+
+
+
+export DRILL_HOME=/home/hadoop/spark/apache-drill-1.8.0
+export PATH=$DRILL_HOME/bin:$PATH
+
+
+
+
+export FLUME_HOME=/home/hadoop/spark/apache-flume-1.6.0-bin
+export PATH=$FLUME_HOME/bin:$PATH
+
+export HBASE_HOME=/home/hadoop/spark/hbase-1.1.2
+export PATH=$HBASE_HOME/bin:$PATH
+
+
+export HIVE_HOME=/home/hadoop/spark/apache-hive-1.2.1-bin
+export PATH=$HIVE_HOME/bin:$PATH
+
+
+export KAFKA_HOME=/home/hadoop/spark/kafka_2.11-0.9.0.0
+export PATH=$KAFKA_HOME/bin:$PATH
+
+
+
+export MAHOUT_HOME=/home/hadoop/spark/apache-mahout-distribution-0.11.1
+export PATH=$MAHOUT_HOME/bin:$PATH
+export MAHOUT_LOCAL=true
+
+
+
+export M2_HOME=/home/hadoop/spark/apache-maven-3.3.9
+export PATH=$M2_HOME/bin:$PATH
+
+export MESOS_HOME=/home/hadoop/spark/mesos-0.27.1
+export PATH=$MESOS_HOME/bin:$PATH
+
+
+export PHOENIX_HOME=/home/hadoop/spark/phoenix-4.7.0-HBase-1.1-bin
+export PATH=$PHOENIX_HOME/bin:$PATH
+
+
+
+export SBT_HOME=/home/hadoop/spark/sbt
+export PATH=$SBT_HOME/bin:$PATH
+
+export SCALA_HOME=/home/hadoop/spark/scala-2.11.7
+export PATH=$SCALA_HOME/bin:$PATH
+
+
+  ############ Spark 1.x Version #################
+#export SPARK_HOME=/home/hadoop/spark/spark-1.6.0-bin-hadoop2.6
+#export PATH=$SPARK_HOME/bin:$PATH
+
+
+  ############ Spark 2.x Version #################
+export SPARK_HOME=/home/hadoop/spark/spark-2.0.2-bin-hadoop2.6
+export PATH=$SPARK_HOME/bin:$PATH
+
+export STORM_HOME=/home/hadoop/spark/apache-storm-0.10.0
+export PATH=$STORM_HOME/bin:$PATH
+
+
+export WEKA_HOME=/home/hadoop/spark/weka-3-7-13
+
+
+
+export ZEPPELIN_HOME=/home/hadoop/spark/zeppelin-0.6.2-bin-all
+export PATH=$ZEPPELIN_HOME/bin:$PATH
+
+
+
+export ZOOKEEPER_HOME=/home/hadoop/spark/zookeeper-3.4.6
+export PATH=$ZOOKEEPER_HOME/bin:$PATH
+
+
+export PIG_HOME=/home/hadoop/spark/pig-0.15.0
+export PATH=$PIG_HOME/bin:$PATH
+
+
+export INPUT_PATH=/home/hadoop/spark/input_poc/
+
+
+export OOZIE_BUILD=/home/hadoop/spark/oozie-4.2.0_build
+export PATH=$OOZIE_BUILD/bin:$PATH
+
+export OOZIE_HOME=/home/hadoop/spark/oozie-4.2.0
+export PATH=$OOZIE_HOME/bin:$PATH
+
+export SQOOP_HOME=/home/hadoop/spark/sqoop-1.4.6.bin__hadoop-2.0.4-alpha
+export PATH=$SQOOP_HOME/bin:$PATH
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export PIG_HOME=/home/hadoop/spark/pig-0.15.0
+export PATH=$PIG_HOME/bin:$PATH
+
+
+export INPUT_PATH=/home/hadoop/spark/input_poc/
+
+
+export OOZIE_BUILD=/home/hadoop/spark/oozie-4.2.0_build
+export PATH=$OOZIE_BUILD/bin:$PATH
+
+export OOZIE_HOME=/home/hadoop/spark/oozie-4.2.0
+export PATH=$OOZIE_HOME/bin:$PATH
+
+export SQOOP_HOME=/home/hadoop/spark/sqoop-1.4.6.bin__hadoop-2.0.4-alpha
+export PATH=$SQOOP_HOME/bin:$PATH
+
+
+
+
+
+
+
+
+
+
+
+
+
+********** HIVE ****************
+  
+  JobTracker + NameNode ===>> Masters
+  
+  TaskTracker + Data Node ==>> Slave Node
+  
+
+
+
+
+
+  Data Model ::-->>
+   i)Tables
+   ii) Paritions
+   iii) Bukets
+   
+   
+   DataBase :---> Namespace containing a set of  tables
+   
+   Holds Table / Paritions 
+   
+   
+1) Where is table data stored in Apache Hive by default?
+
+hdfs: //namenode_server/user/hive/warehouse
+
+
+
+2)  What is the use of explode in Hive?
+
+Explode in Hive is used to convert complex data types into desired table formats. explode UDTF basically emits all the elements in an array into multiple rows.
+
+
+
+
+
+
+
+
+3) How to see the name node information in hive
+
+ $hive $ set fs.defaultFS;
+
+hive > dfs -ls /user/root;
+
+
+select * from table ;
+
+   Aggerage Functions
+  i)Count(1)
+ ii)count(*)
+ iii)count('durga')
+
+Hive : Negative Libary 
+
+select * from orders limit 100
+
+select * from orders row 10;
+
+select * from orders top 100;
+
+
+CREATE [TEMPORARY] [EXTERNAL] TABLE [IF NOT EXISTS]
+
+
+Primitive Type
+array_type
+map_type
+struct_type
+union_type
+
+============
+Paritioned By ,Cluster by , Skewed By
+
+
+Avro===> hive 0.14
+
+ Hive table nothing but create table 
+RCFILE
+ORC
+PARQUEST
+============================
+In High Cardinality --> No Paritions on that  column 
+
+all Parition is going to Hive MetaStore 
+
+Distributed Loading 
+ 
+   HDFS 
+
+i) Partition on Dept 
+
+ i) Dept= CustomerRelation (68)
+ ii)Dept Customer SErvice(100)
+ iii) Dept=Finances(200)
+
+Select count(*)from tbl where dept='CustomerRElation'==>>
+
+Query to Hive MetaStore :--> check the parition table and query the data 
+
+
+
+===============================
+
+sqoop import \
+ --connect jdbc:mysql://localhost/training
+ --username root \
+--password root \
+--query 'SELECT id,first_name,last_name,phone ,email
+  from sql_tbl where $CONDIFION' \
+--split-by id \
+--target-dir /user/shiva/sqoop_stage/
+
+========================================
+
+create external table np_tbl(
+
+)
+ROW FORMAT DELIMITED FIEDS TERMINATED BY ','
+STORED AS TEXTFILE
+LOCATION '/user/shiva/sqoop_stage';
+
+1000
+==================
+  Static paritions 
+create external table sp_tbl(
+
+ALL COLUMNS except dept)
+
+PARTITIONED BY(dept string) row format delimited
+Fields terminated by ','
+stored as textfile
+location '/user/shiva/sp_tbl'
+
+ show create table np_tbl
+
+
+Insert overwrite   table sp_tbl parition(dept='ACCOUNTIN') select  id,first_name,last_name,phone,email,date,office,address,city,postal,region,
+country ) from np_tbl where dept='Accounting'
+
+
+Inser overwrite table dp_tbl parition(dept) select , ,,,  should be at the end  dept from np_tbl 
+
+Hive by default is strict mode not to prevent accident parition creation 
+
+
+set hive.exec.dyanmic.parition.mode=nonstrict 
+
+
+Parition based on the adversitments on that we 
+
+
+create external table 'sp_dp'( -,--)
+PARTITIONED BY(DEPT string,country string)
+ROW FORMATED DELIMITED
+FIEDLS TERMINITED BY ','
+STORED AS TEXTFILE
+LOCATION '/user/hive/
+==================*************** ===============
+
+set hive.exec.dyanmic.parition=true
+set hive.exec.dyanmic.parition.mode=nonstrict
+set hive.exec.dyanmic.partitions=1000
+set hive.exec.dyanmic.partitions.pernode=1000
+
+
+
+=======================================
+
+insert overwrite table sp_dp parition(dept='ACCOUNTNG',country) select id,first_name,last_name COUNTRY MUST BE LAST from sp_dp where dept='Advertising';
+========================
+
+
+If Static Partition means we need to set the values 
+In the above query dept is static parition we need to set the valeus here dept='Accountin' and where class also need to set the valeus dept='Accountring'
+
+In case of dynamic parition the value must be last in the select statment example here country column is last statements ...
+=========================
+
+show paritions sp_tbl
+
+
+=================================================================================
+ ************  JSON Data How to process Data  **********
+
+hive-serdes-1.0-SNAPSHOT.jar
+
+
+Copy this one $HIVE_LIB folder into lib folder 
+
+create external table originialData(
+ text String,
+user STRUCT <
+  screen_name:STRING,
+  name:STRING,
+  url:STRING
+>
+ROW FORMAT SERDE  'com.cloudera.hive.serda.JSONSerDe'
+location '/home/hadoop/work/bigsql.db/raw_tables';
+
+
+
+
+add jar /home/hadoop/hive/hive-serdes-1.0-SNAPSHOT.jar
+
+Duplicate TBL :-->>
+create table tablename as select * from originaldata;
+
+select user.name,text from descirable  
+
+select user.name,text from descirable where user.locations like '%USA%'
+
+select text from desiretable whre text like '%bigdata%'
+
+
+select user.name ,text from 
+
+=========================================
+
+
+select * from salesbycountrywise where 
+
+
+Hive Buckets
+
+When ever run the query  the data is 
+
+Buketes perform execution on some random data .
+
+create table newBucketData(productid,name,country)
+
+into 4 buckets;
+
+insert overwrite table newbucketdata
+
+select prodid,name ,country from salesbycountrywise;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=================
+
+
+17) Explain about SORT BY, ORDER BY, DISTRIBUTE BY and CLUSTER BY in Hive.
+
+SORT BY – Data is ordered at each of ‘N’ reducers where the reducers can have overlapping range of data.
+
+ORDER BY- This is similar to the ORDER BY in SQL where total ordering of data takes place by passing it to a single reducer.
+
+DISTRUBUTE BY – It is used to distribute the rows among the reducers. Rows that have the same distribute by columns will go to the same reducer.
+
+CLUSTER BY- It is a combination of DISTRIBUTE BY and SORT BY where each of the N reducers gets non overlapping range of data which is then sorted by those ranges at the respective reducers.

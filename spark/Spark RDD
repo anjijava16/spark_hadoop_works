@@ -1,0 +1,85 @@
+
+
+Spark --> Distributed
+      -->In Memory
+	  -->Processing(bath,Relatime,Interative,Iterative,Graph)
+	  -->Relaiable
+	  
+Spark -->batch(MR)
+      -->Realtime Streaming(Kafka,Flume)
+	  -->Interactive (SQL,HIVE,Impala)
+	  -->Iterative (ML)
+	  -->Gragh 
+
+RDD : Resilient Distibuted DataSet 
+R: -->> Fault tolerance
+
+	  
+The full form of RDD is resilience distributed dataset. It is a representation of data located on a network which is 
+Immutable - You can operate on the rdd to produce another rdd but you can’t alter it.
+Partitioned / Parallel - The data located on RDD is operated in parallel. Any operation on RDD is done using multiple nodes.
+Resilience - If one of the node hosting the partition fails, another nodes takes its data.
+
+RDD provides two kinds of operations: Transformations and Actions.
+
+Ans: The transformations are the functions that are applied on an RDD (resilient distributed data set). The transformation results in another RDD. A transformation is not executed until an action follows.
+
+The example of transformations are:
+map() - applies the function passed to it on each element of RDD resulting in a new RDD.
+filter() - creates a new RDD by picking the elements from the current RDD which pass the function argument.
+
+
+An action brings back the data from the RDD to the local machine. Execution of an action results in all the previously created transformation. The example of actions are:
+reduce() - executes the function passed again and again until only one value is left. The function should take two argument and return one value.
+take() - take all the values back to the local node form RDD.
+
+
+
+
+Spark provides two methods to create RDD:
+
+i)  By parallelizing a collection in your Driver program. This makes use of SparkContext’s ‘parallelize’ method
+val data = Array(2,4,6,8,10)
+val distData = sc.parallelize(data)
+
+ii)
+ By loading an external dataset from external storage like HDFS, HBase, shared file system
+ 
+ 
+ .Name types of Cluster Managers in Spark.
+The Spark framework supports three major types of Cluster Managers:
+
+Standalone: a basic manager to set up a cluster
+Apache Mesos: generalized/commonly-used cluster manager, also runs Hadoop MapReduce and other applications
+Yarn: responsible for resource management in Hadoop
+ Yarn is one of the key features in Spark, providing a central and resource management platform to deliver scalable operations across the cluster .
+ Running Spark on Yarn necessitates a binary distribution of Spar as built on Yarn support.
+ 
+ 
+ 
+ Spark Core
+
+Spark Core is the base engine for large-scale parallel and distributed data processing. It is responsible for:
+memory management and fault recovery
+scheduling, distributing and monitoring jobs on a cluster
+interacting with storage systems
+Spark introduces the concept of an RDD (Resilient Distributed Dataset), an immutable fault-tolerant, distributed collection of objects that can be operated on in parallel. An RDD can contain any type of object and is created by loading an external dataset or distributing a collection from the driver program.
+RDDs support two types of operations:
+Transformations are operations (such as map, filter, join, union, and so on) that are performed on an RDD and which yield a new RDD containing the result.
+Actions are operations (such as reduce, count, first, and so on) that return a value after running a computation on an RDD.
+Transformations in Spark are “lazy”, meaning that they do not compute their results right away. Instead, they just “remember” the operation to be performed and the dataset (e.g., file) to which the operation is to be performed. The transformations are only actually computed when an action is called and the result is returned to the driver program. This design enables Spark to run more efficiently. For example, if a big file was transformed in various ways and passed to first action, Spark would only process and return the result for the first line, rather than do the work for the entire file.
+By default, each transformed RDD may be recomputed each time you run an action on it. However, you may also persist an RDD in memory using the persist or cache method, in which case Spark will keep the elements around on the cluster for much faster access the next time you query it.
+SparkSQL
+
+SparkSQL is a Spark component that supports querying data either via SQL or via the Hive Query Language. It originated as the Apache Hive port to run on top of Spark (in place of MapReduce) and is now integrated with the Spark stack. In addition to providing support for various data sources, it makes it possible to weave SQL queries with code transformations which results in a very powerful tool. Below is an example of a Hive compatible query:
+// sc is an existing SparkContext.
+val sqlContext = new org.apache.spark.sql.hive.HiveContext(sc)
+
+sqlContext.sql("CREATE TABLE IF NOT EXISTS src (key INT, value STRING)")
+sqlContext.sql("LOAD DATA LOCAL INPATH 'examples/src/main/resources/kv1.txt' INTO TABLE src")
+
+// Queries are expressed in HiveQL
+sqlContext.sql("FROM src SELECT key, value").collect().foreach(println)
+Spark Streaming
+
+Spark Streaming supports real time processing of streaming data, such as production web server log files (e.g. Apache Flume and HDFS/S3), social media like Twitter, and various messaging queues like Kafka. Under the hood, Spark Streaming receives the input data streams and divides the data into batches. Next, they get processed by the Spark engine and generate final stream of results in batches, as depicted below.
