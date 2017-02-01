@@ -1,0 +1,15 @@
+
+5
+down vote
+accepted
+What is the home directory really for?
+You have a small confusion here. Just like /home exists for local filesystems on Linux, where users are given their own storage space, /users is a home mount ON the HDFS (Distributed FS). The tutorial needs you to administratively create a home directory for the user you wish to later be running data loads and queries as, such that they get adequate permissions and storage access onto the HDFS. The tutorial is not asking you to create these directories locally.
+
+Do I migrate data to the home directory first and to the real distributed system afterwards?
+I believe my above answer should clarify this for you. You should create your home directory on the HDFS, and then load all your data inside of that directory.
+
+How does WebHDFS work and what role does it play with regards to the user.name variable
+WebHDFS is one of the various ways to access HDFS. Regular clients to talk to HDFS require use of Java APIs. WebHDFS (and also HttpFs) techniques were added to HDFS to let other languages have their own set of APIs by providing a REST front-end to HDFS. WebHDFS allows user-authentication, to help persist the permission and security models.
+
+How would I migrate "big data" into my HDFS on the fly - or even if it's not big data, how do I populate my file system in a proper way (meaning, that the chunks get randomly distributed across the cluster?
+The large part of problem HDFS solves for you is that of managing distribution of data. When loading files or data streams to HDFS (via CLI tools, sinks from Apache Flume, etc.), the blocks are spread in an ideal distribution by HDFS itself, and the chunking is managed by it as well. All you need to do is use the user-side regular FileSystem style APIs and forget about what goes where underneath - its all managed for you.
