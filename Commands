@@ -1,0 +1,16 @@
+ nc -lk 8090
+
+
+$ curl -i "http://localhost:50070/webhdfs/v1/tmp?user.name=hadoop&op=GETFILESTATUS"
+
+curl -i -X PUT "http://localhost:50070/webhdfs/v1/tmp/webhdfs?user.name=hadoop&op=MKDIRS"
+ 
+ 
+ How would I migrate "big data" into my HDFS on the fly - or even if it's not big data, 
+ how do I populate my file system in a proper way (meaning, that the chunks get randomly distributed across the cluster?
+ 
+The large part of problem HDFS solves for you is that of managing distribution of data.
+When loading files or data streams to HDFS (via CLI tools, sinks from Apache Flume, etc.), 
+the blocks are spread in an ideal distribution by HDFS itself, 
+and the chunking is managed by it as well. All you need to do is use the user-side regular FileSystem style APIs and 
+forget about what goes where underneath - its all managed for you.
