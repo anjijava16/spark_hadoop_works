@@ -1,0 +1,8 @@
+
+
+Maveen                   ======>>SBT
+
+clean : mvn clean          ===>>sbt clean
+Project mvn eclipse      ====> sbt eclipse     ===>> mvn idea(InteJ)
+
+Build mvn package                        sbt package
