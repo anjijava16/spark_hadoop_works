@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+ <property>
+   <name>dfs.replication</name>
+   <value>1</value>
+ </property>
+
+<property> 
+<name>dfs.block.size</name> 
+<value>94217728</value> 
+<description>Block size(Here Block SIZE 90MB)</description> 
+</property>
+
+ <property>
+   <name>dfs.namenode.name.dir</name>
+   <value>/home/hadoop/spark/hadoop2data/dfs/name</value>
+ </property>
+ <property>
+   <name>dfs.datanode.data.dir</name>
+   <value>/home/hadoop/spark/hadoop2data/dfs/data</value>
+ </property>
+
+        <property>
+           <name>dfs.webhdfs.enabled</name>
+           <value>true</value>
+        </property>
+
+</configuration>
+
+
+
+
+
+
