@@ -1,0 +1,21 @@
+Path : /home/hadoop/spark/spark-2.0.2-bin-hadoop2.6/sbin :==> start the master Node
+
+./start-master.sh
+
+===============================================================================================
+
+Check the Master Node on Browser : http://localhost:8080/
+
+Spark Master : spark://hadoop:7077
+
+Slave Start Path : 
+-----------------------
+Path :/home/hadoop/spark/spark-2.0.2-bin-hadoop2.6/sbin
+./start-slave.sh spark://hadoop:7077
+
+===============================================================================================
+spark-submit --class com.iwinner.java.core.WordCount wordCount.jar /input.txt /output01_word2
+
+Spark Node test on master Node :
+
+spark-submit --master spark://hadoop:7077 --class com.iwinner.java.core.WordCount wordCount.jar /input.txt /output01_word2
