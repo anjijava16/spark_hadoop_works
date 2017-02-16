@@ -1,0 +1,19 @@
+
+Step1) beeline
+
+Step2) !connect jdbc:hive2://localhost:10000/dardb
+
+
+!connect jdbc:hive2://localhost:10000/default
+
+
+1. beeline -u "jdbc:hive2://localhost:10000" -n username
+> beeline should prompt for the password.
+2. beeline -u "jdbc:hive2://localhost:10000" -n username -p <password is expected because -p is provided>
+If we can achieve (1) above within beeline, I think that should be sufficient to solve this issue without any work-arounds mentioned by Thejas M Nair in the first comment.
+
+/
+!connect jdbc:hive2://localhost:10000 -n username -p password
+
+
+!connect jdbc:hive2://localhost:10000/dardb -n username -p password
