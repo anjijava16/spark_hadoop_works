@@ -1,0 +1,8 @@
+spark-submit --class "com.miaozhen.etl.region.distribution.HiveTest" \
+--jars /home/workspace/spark-1.2.0-bin-hadoop2/lib_managed/jars/datanucleus-api-jdo-3.2.6.jar,/home/workspace/spark-1.2.0-bin-hadoop2/lib_managed/jars/datanucleus-rdbms-3.2.9.jar,/home/workspace/spark-1.2.0-bin-hadoop2/lib_managed/jars/datanucleus-core-3.2.10.jar,/home/workspace/hadoop/sqoop/lib/mysql-connector-java-5.1.31.jar \
+--master yarn-cluster \
+--num-executors 16 \
+--driver-memory 8g \
+--executor-memory 4g \
+--executor-cores 4 \
+scala.test.jar
