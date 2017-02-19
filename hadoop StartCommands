@@ -1,0 +1,47 @@
+YARN Service (ResourceManager + NodeManager):
+$HADOOP_HOME/sbin/stop-yarn.sh
+$HADOOP_HOME/sbin/start-yarn.sh
+
+HDFS Service (NameNode + DataNode):
+$HADOOP_HOME/sbin/stop-dfs.sh
+$HADOOP_HOME/sbin/start-dfs.sh
+
+Balancer Service (Do Balance):
+$HADOOP_HOME/sbin/stop-balancer.sh
+$HADOOP_HOME/sbin/start-balancer.sh
+
+Start DataNode, NameNode, NodeManager, ResourceManager Service respectively:
+$HADOOP_HOME/sbin/hadoop-daemon.sh start datanode
+$HADOOP_HOME/sbin/hadoop-daemon.sh start namenode
+$HADOOP_HOME/sbin/yarn-daemon.sh start nodemanager
+$HADOOP_HOME/sbin/yarn-daemon.sh start resourcemanager
+
+Start zkfc(DFSZKFailoverController) Service:
+./sbin/hadoop-daemon.sh start zkfc
+./bin/hdfs zkfc   (which will show detailed launching information for debugging)
+
+ZooKeeper(QuorumPeerMain) Service:
+$ZK_HOME/bin/zkServer.sh stop
+$ZK_HOME/bin/zkServer.sh start
+$ZK_HOME/bin/zkServer.sh restart
+$ZK_HOME/bin/zkServer.sh status
+
+Start JournalNode Service:
+$HADOOP_HOME/sbin/hadoop-daemon.sh start journalnode
+
+NameNode-HA-Related Operation:
+Check NameNode Status(active/standby):    hdfs haadmin -getServiceState <serviceId>
+Transfer from standby to active manually:  hdfs haadmin -transitionToActive <serviceId>
+
+List Current Undone MapReduce Task:
+mapred job -list
+
+Kill MapReduce Task:
+mapred job -kill <jobid>
+
+List Current Undone YARN Task:
+yarn application -list
+
+Kill YARN Task:
+yarn application -kill <YARN_Application_id>
+
