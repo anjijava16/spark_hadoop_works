@@ -1,0 +1,123 @@
+nc: Int => Int = <function1>
+
+scala> List(1,2,3).map(x=>x)
+res12: List[Int] = List(1, 2, 3)
+
+scala> List(1,2,3).map(x=>x).println()
+<console>:24: error: value println is not a member of List[Int]
+       List(1,2,3).map(x=>x).println()
+                             ^
+
+scala> val ls=List(1,2,3).map(x=>x)
+ls: List[Int] = List(1, 2, 3)
+
+scala> ls.foreach(println)
+1
+2
+3
+
+scala> List(1,2,3).map(x=>x+1)
+res15: List[Int] = List(2, 3, 4)
+
+scala> List(1,2,3).map(x=>x+1).foreach(println)
+2
+3
+4
+
+scala> List("hello","name","IS").map(x=>x.charAt(0))
+res17: List[Char] = List(h, n, I)
+
+scala> List("hello","name","IS").map(x=>x.charAt(0)).foreach(println)
+h
+n
+I
+
+scala> case class Name(name:String,age:Int)
+defined class Name
+
+scala> val names=List(Name("anji",1),Name("aa",2))
+names: List[Name] = List(Name(anji,1), Name(aa,2))
+
+scala> names.map(x=>x.name)
+res19: List[String] = List(anji, aa)
+
+scala> names.map(x=>x.name).foreach(println)
+anji
+aa
+
+scala> val list=List(1 to 1000)
+list: List[scala.collection.immutable.Range.Inclusive] = List(Range(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 16...
+scala> list.map(x=>x)
+res21: List[scala.collection.immutable.Range.Inclusive] = List(Range(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 1...
+scala> val listToMap=list.map(x=>x)
+listToMap: List[scala.collection.immutable.Range.Inclusive] = List(Range(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 16...
+scala> listToMap.sq
+<console>:28: error: value sq is not a member of List[scala.collection.immutable.Range.Inclusive]
+       listToMap.sq
+                 ^
+
+scala> Math.sqrt
+   def sqrt(x$1: Double): Double
+
+scala> val id=Math.sqrt(10)
+id: Double = 3.1622776601683795
+
+scala> val id=Math.sqrt(9)
+id: Double = 3.0
+
+scala> val mapTo=list.map(x=>Math.sqrt(x))
+<console>:25: error: type mismatch;
+ found   : scala.collection.immutable.Range.Inclusive
+ required: Double
+       val mapTo=list.map(x=>Math.sqrt(x))
+                                       ^
+
+scala> 
+
+scala> 
+
+scala> 
+
+scala> (1 to 1000).filter(x=>math.sqrt(x)%1==0)
+res23: scala.collection.immutable.IndexedSeq[Int] = Vector(1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361, 400, 441, 484, 529, 576, 625, 676, 729, 784, 841, 900, 961)
+
+scala> (1 to 1000).filter(x=>{
+     | val t=math.sqrt(x)
+     | t=t.toInt
+     | })
+<console>:26: error: reassignment to val
+       t=t.toInt
+        ^
+
+scala> (1 to 1000).filter(x=>{
+     | val t =math.sqrt(x)
+     | t==t.toInt
+     | })
+res25: scala.collection.immutable.IndexedSeq[Int] = Vector(1, 4, 9, 16, 25, 36, 49, 64, 81, 100, 121, 144, 169, 196, 225, 256, 289, 324, 361, 400, 441, 484, 529, 576, 625, 676, 729, 784, 841, 900, 961)
+
+scala> 2.2%1
+res26: Double = 0.20000000000000018
+
+scala> def sum(ls:List[Int])=ls.reduce((a,b)=>a+b)
+sum: (ls: List[Int])Int
+
+scala> sum(List(1,2,3))
+res27: Int = 6
+
+scala> def prod(ls:List[Int])=ls.reduce((a,b)=>a*b)
+prod: (ls: List[Int])Int
+
+scala> prod(List(1 to 10))
+<console>:30: error: type mismatch;
+ found   : scala.collection.immutable.Range.Inclusive
+ required: Int
+       prod(List(1 to 10))
+                   ^
+
+scala> prod(List(1,2,3,4))
+res29: Int = 24
+
+scala> val ls=List(1 to 3)
+ls: List[scala.collection.immutable.Range.Inclusive] = List(Range(1, 2, 3))
+
+scala> 
