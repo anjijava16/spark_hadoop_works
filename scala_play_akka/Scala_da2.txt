@@ -1,0 +1,79 @@
+High Order Function in Scala:
+
+
+scala> val inc=(n:Int)=>n+1
+inc: Int => Int = <function1>
+
+scala> inc
+res9: Int => Int = <function1>
+
+scala> inc(1)
+res10: Int = 2
+
+scala> inc.apply(1)
+res11: Int = 2
+
+scala> 
+
+
+
+
+
+
+scala> println(s1)
+Set(Range(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+
+scala> (1,2)
+res1: (Int, Int) = (1,2)
+
+scala> s1.to
+to   toArray   toBuffer   toIndexedSeq   toIterable   toIterator   toList   toMap   toParArray   toSeq   toSet   toStream   toString   toTraversable   toVector
+
+scala> s1.toSet
+res2: scala.collection.immutable.Set[scala.collection.immutable.Range.Inclusive] = Set(Range(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+
+scala> val a=(1,2)
+a: (Int, Int) = (1,2)
+
+scala> a._1
+res3: Int = 1
+
+scala> a._2
+res4: Int = 2
+
+scala> val a=Array(1,2,3)
+a: Array[Int] = Array(1, 2, 3)
+
+scala> a.apply
+apply   applyOrElse
+
+scala> a.apply(0)
+res5: Int = 1
+
+scala> 
+
+
+
+class Country{
+  val name={
+
+    println("Initization time")
+    "INIDA"
+
+  }
+
+  lazy val nae2={
+
+    println("teset name 2")
+    "BHarath"
+  }
+}
+
+
+
+
+val c=new Country
+
+c.name
+
+c.nae2
