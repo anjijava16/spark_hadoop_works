@@ -1,0 +1,8 @@
+
+def max(ls:List[String]):String={
+
+ls.reduce((a,b)=>if(a.length>b.length)a else b)
+
+}
+
+max(List("ii","adfj"))
